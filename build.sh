@@ -137,6 +137,32 @@ build_treble() {
 rm out/target/product/*/*.img
 #rm frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 #mv lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid/
+
+
+if [ -d ~/.android-certs/ ]; then
+echo "key already exist"
+
+else
+    subject='/C=PH/ST=Philippines/L=Manila/O=Rex H/OU=Rex H/CN=Rex H/emailAddress=dtiven13@gmail.com'
+mkdir ~/.android-certs
+
+for x in releasekey platform shared media networkstack testkey cyngn-priv-app bluetooth sdk_sandbox verifiedboot; do 
+    yes "" | ./development/tools/make_key ~/.android-certs/$x "$subject"
+done
+
+mkdir vendor/extra
+mkdir vendor/lineage-priv/keys
+
+mv ~/.android-certs vendor/extra/keys
+#For Lineage 21 and newer use the command below if not then use above 
+#mv ~/.android-certs vendor/lineage-priv/keys
+echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/extra/keys/releasekey" > vendor/extra/product.mk
+#For Lineage 21 and newer use the command below if not then use above
+#echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/lineage-priv/keys/releasekey" > vendor/lineage-priv/keys/keys.mk
+
+fi
+
+
     lunch ${TARGET}-userdebug
     make -j$(nproc --all) systemimage
 
