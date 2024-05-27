@@ -168,6 +168,9 @@ filegroup(
 EOF
 echo "-include vendor/extra/product.mk" >> device/phh/treble/treble_arm_bvZ.mk
 cat device/phh/treble/treble_arm_bvZ.mk
+
+
+repo forall -g lfs -c 'git lfs pull'
     lunch ${TARGET}-userdebug
     make -j$(nproc --all) systemimage
 
