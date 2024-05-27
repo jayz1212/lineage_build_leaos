@@ -144,7 +144,7 @@ mkdir ~/.android-certs
 
 for x in releasekey platform shared media networkstack testkey cyngn-priv-app bluetooth sdk_sandbox verifiedboot; do 
     yes "" | ./development/tools/make_key ~/.android-certs/$x "$subject"
-
+done
 
 mkdir vendor/extra
 mkdir vendor/lineage-priv
@@ -166,7 +166,8 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 EOF
-echo "-include vendor/extra/product.mk" >> device/phh/treble/treble_arm_bvZ.mk
+
+echo "include vendor/extra/product.mk" >> device/phh/treble/treble_arm_bvZ.mk
 cat device/phh/treble/treble_arm_bvZ.mk
 
 
