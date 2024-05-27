@@ -169,7 +169,12 @@ EOF
 
 echo "include vendor/extra/product.mk" >> device/phh/treble/treble_arm_bvZ.mk
 cat device/phh/treble/treble_arm_bvZ.mk
-
+cd external/chromium-webview/prebuilt/arm64
+git lfs install
+git rev-parse --git-dir
+git config --global --add safe.directory external/chromium-webview/prebuilt/arm64/
+git lfs pull
+cd ../../../..
 
 repo forall -g lfs -c 'git lfs pull'
     lunch ${TARGET}-userdebug
