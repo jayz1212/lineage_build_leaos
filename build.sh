@@ -138,7 +138,7 @@ rm out/target/product/*/*.img
 #rm frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 #mv lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid/
 rm -rf vendor/extra
-
+rm -rf ~/.android-certs
     subject='/C=PH/ST=Philippines/L=Manila/O=Rex H/OU=Rex H/CN=Rex H/emailAddress=dtiven13@gmail.com'
 mkdir ~/.android-certs
 
@@ -149,7 +149,7 @@ done
 mkdir vendor/extra
 mkdir vendor/lineage-priv
 
-cp ~/.android-certs vendor/extra/keys
+mv ~/.android-certs vendor/extra/keys
 #For Lineage 21 and newer use the command below if not then use above 
 #cp ~/.android-certs vendor/lineage-priv/keys
 echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/extra/keys/releasekey" > vendor/extra/product.mk
