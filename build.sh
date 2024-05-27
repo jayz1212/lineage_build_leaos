@@ -138,38 +138,34 @@ rm out/target/product/*/*.img
 #rm frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 #mv lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid/
 rm -rf vendor/extra
-# Define the directory path
-dir_path=".android-certs"
 
-# Read Signing Preference from Environmental Variables and set a default if it is blank
+    subject='/C=PH/ST=Philippines/L=Manila/O=Rex H/OU=Rex H/CN=Rex H/emailAddress=dtiven13@gmail.com'
+mkdir ~/.android-certs
 
-: ${SIGNING_PREFERENCE:=false}
-echo "Signing Preference: $SIGNING_PREFERENCE"
+for x in releasekey platform shared media networkstack testkey cyngn-priv-app bluetooth sdk_sandbox verifiedboot; do 
+    yes "" | ./development/tools/make_key ~/.android-certs/$x "$subject"
 
-# Check if the directory exists
-if [ -d "$dir_path" && ${{SIGNING_PREFERENCE}} != "false" ]; then
-  echo "Keys provided, setting them up"
-  mkdir -p vendor/extra
-  mkdir -p vendor/lineage-priv
-  cp -R .android-certs vendor/extra/keys
-  cp -R .android-certs vendor/lineage-priv/keys
-  echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/extra/keys/releasekey" > vendor/extra/product.mk
-  echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/lineage-priv/keys/releasekey" > vendor/lineage-priv/keys/keys.mk
-  
-  echo "filegroup(
-    name = \"android_certificate_directory\",
+
+mkdir vendor/extra
+mkdir vendor/lineage-priv
+
+cp ~/.android-certs vendor/extra/keys
+#For Lineage 21 and newer use the command below if not then use above 
+#cp ~/.android-certs vendor/lineage-priv/keys
+echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/extra/keys/releasekey" > vendor/extra/product.mk
+#For Lineage 21 and newer use the command below if not then use above
+#echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/lineage-priv/keys/releasekey" > vendor/lineage-priv/keys/keys.mk
+
+cat << 'EOF' > vendor/extra/keys/BUILD.bazel
+filegroup(
+    name = "android_certificate_directory",
     srcs = glob([
-        \"*.pk8\",
-        \"*.pem\",
+        "*.pk8",
+        "*.pem",
     ]),
-    visibility = [\"//visibility:public\"],
-)" > vendor/lineage-priv/keys/BUILD.bazel
-cp vendor/lineage-priv/keys/BUILD.bazel 
-
-else
-  echo "No Keys Provided, skipping signing"
-fi
-
+    visibility = ["//visibility:public"],
+)
+EOF
 echo "-include vendor/extra/product.mk" >> device/phh/treble/treble_arm_bvZ.mk
 cat device/phh/treble/treble_arm_bvZ.mk
     lunch ${TARGET}-userdebug
