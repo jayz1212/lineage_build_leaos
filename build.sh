@@ -223,8 +223,18 @@ cat device/phh/treble/treble_arm_bvZ.mk
 
     lunch ${TARGET}-userdebug
     mka target-files-package otatools
+
+# Main environment
 MAIN=/tmp/src/android
-    cp -r $MAIN/android-certs $HOME/.android-certs
+OUT=$MAIN/out/target/product/phhgsi_arm64_ab
+
+# Copy into admin folder
+cp -R $MAIN/android-certs $HOME/.android-certs
+
+# Change directory to the root of the Android build environment
+cd $MAIN
+
+
 
 
 croot
