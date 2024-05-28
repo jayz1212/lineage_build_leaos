@@ -214,7 +214,8 @@ echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/extra/keys/releasekey" > vendor/
 fi
 
 
-
+echo "-include vendor/extra/product.mk" >> device/phh/treble/treble_arm_bvZ.mk
+cat device/phh/treble/treble_arm_bvZ.mk
 
 
 
