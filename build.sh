@@ -183,17 +183,19 @@ if [ -d "vendor/extra/keys" ]; then
   echo "Directory vendor/extra/keys already exists, skipping."
 else
     subject='/C=PH/ST=Philippines/L=Manila/O=Rex H/OU=Rex H/CN=Rex H/emailAddress=dtiven13@gmail.com'
-mkdir ./android-certs
 
-for x in releasekey platform shared media networkstack testkey cyngn-priv-app bluetooth sdk_sandbox verifiedboot; do 
-    yes "" | ./development/tools/make_key ./android-certs/$x "$subject"; \
+mkdir ~/.android-certs
+
+for x in releasekey platform shared media networkstack testkey cyngn-priv-app bluetooth sdk_sandbox verifiedboot; do \
+yes "" | ./development/tools/make_key ~/.android-certs/$x "$subject"; \
 done
+
 
 
 mkdir -p vendor/extra
 mkdir vendor/lineage-priv
 
-cp -r ./android-certs vendor/extra/keys
+mv ~/.android-certs vendor/extra/keys
 #For Lineage 21 and newer use the command below if not then use above 
 #cp ~/.android-certs vendor/lineage-priv/keys
 echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/extra/keys/releasekey" > vendor/extra/product.mk
