@@ -6,7 +6,7 @@ OUT=$MAIN/out/target/product/phhgsi_arm64_ab/system.img
 cp -r $MAIN/android-certs $HOME/.android-certs
 
 
-cd out/target/product/phhgsi_arm64_ab
+#cd out/target/product/phhgsi_arm64_ab
 sign_target_files_apks -o -d ~/.android-certs \
 system.img \
 sign.img
