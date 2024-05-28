@@ -177,12 +177,11 @@ for folder in $folders; do
 done
 
 
-# Check if the directory exists
+mkdir -p vendor/extra
+
 if [ -d "vendor/extra/keys" ]; then
-  # Check if the directory is empty
-  if [ "$(ls -A vendor/extra/keys)" ]; then
-    echo "not empty skipping key creation"
-  else
+  echo "Directory vendor/extra/keys already exists, skipping."
+else
     subject='/C=PH/ST=Philippines/L=Manila/O=Rex H/OU=Rex H/CN=Rex H/emailAddress=dtiven13@gmail.com'
 mkdir ./android-certs
 
@@ -211,10 +210,9 @@ echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/extra/keys/releasekey" > vendor/
 #     visibility = ["//visibility:public"],
 # )
 # EOF
-  fi
-else
-  echo "Directory vendor/extra/keys does not exist."
+  echo "Key Created."
 fi
+
 
 
 
