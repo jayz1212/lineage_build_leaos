@@ -190,7 +190,7 @@ for x in releasekey platform shared media networkstack testkey cyngn-priv-app bl
 done
 
 
-mkdir vendor/extra
+mkdir -p vendor/extra
 mkdir vendor/lineage-priv
 
 cp -r ./android-certs vendor/extra/keys
