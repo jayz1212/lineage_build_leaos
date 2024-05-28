@@ -223,11 +223,10 @@ cat device/phh/treble/treble_arm_bvZ.mk
 
 
 
-   # lunch ${TARGET}-userdebug
-    # m bacon
-    # mka bacon
-    breakfast treble_arm64_bvZ userdebug
-    brunch treble_arm64_bvZ
+   lunch ${TARGET}-userdebug
+   make clean
+   mka bacon
+
 
 # # Main environment
 # MAIN=/tmp/src/android
