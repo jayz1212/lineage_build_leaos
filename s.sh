@@ -3,7 +3,7 @@ source build/envsetup.sh
 MAIN=/tmp/src/android
 OUT=$MAIN/out/target/product/phhgsi_arm64_ab/system.img
 
-cp -r $MAIN/.android-certs $HOME/.android-certs
+cp -r $MAIN/android-certs $HOME/.android-certs
 
 
 cd out/target/product/phhgsi_arm64_ab
