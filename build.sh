@@ -222,31 +222,31 @@ cat device/phh/treble/treble_arm_bvZ.mk
 
 
     lunch ${TARGET}-userdebug
-    mka target-files-package otatools
+    m bacon
 
-# Main environment
-MAIN=/tmp/src/android
-OUT=$MAIN/out/target/product/phhgsi_arm64_ab
+# # Main environment
+# MAIN=/tmp/src/android
+# OUT=$MAIN/out/target/product/phhgsi_arm64_ab
 
-# Copy into admin folder
-cp -R $MAIN/android-certs $HOME/.android-certs
+# # Copy into admin folder
+# cp -R $MAIN/android-certs $HOME/.android-certs
 
-# Change directory to the root of the Android build environment
-cd $MAIN
-
-
+# # Change directory to the root of the Android build environment
+# cd $MAIN
 
 
-croot
-./build/tools/releasetools/ sign_target_files_apks -o -d ~/.android-certs \
-    $OUT/obj/PACKAGING/target_files_intermediates/*-target_files-*.zip \
-    signed-target_files.zip
 
 
-./build/tools/releasetools/ota_from_target_files -k ~/.android-certs/releasekey \
-    --block --backup=true \
-    signed-target_files.zip \
-    signed-ota_update.zip
+# croot
+# ./build/tools/releasetools/ sign_target_files_apks -o -d ~/.android-certs \
+#     $OUT/obj/PACKAGING/target_files_intermediates/*-target_files-*.zip \
+#     signed-target_files.zip
+
+
+# ./build/tools/releasetools/ota_from_target_files -k ~/.android-certs/releasekey \
+#     --block --backup=true \
+#     signed-target_files.zip \
+#     signed-ota_update.zip
 
 
 
