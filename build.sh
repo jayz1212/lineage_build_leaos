@@ -219,6 +219,7 @@ cd ../../../..
 
 repo forall -g lfs -c 'git lfs pull'
     lunch ${TARGET}-userdebug
+    make clean
     make -j$(nproc --all) systemimage
 
 
