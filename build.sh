@@ -197,18 +197,18 @@ echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/extra/keys/releasekey" > vendor/
 #For Lineage 21 and newer use the command below if not then use above
 #echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/lineage-priv/keys/releasekey" > vendor/lineage-priv/keys/keys.mk
 
-cat << 'EOF' > vendor/extra/keys/BUILD.bazel
-filegroup(
-    name = "android_certificate_directory",
-    srcs = glob([
-        "*.pk8",
-        "*.pem",
-    ]),
-    visibility = ["//visibility:public"],
-)
-EOF
+# cat << 'EOF' > vendor/extra/keys/BUILD.bazel
+# filegroup(
+#     name = "android_certificate_directory",
+#     srcs = glob([
+#         "*.pk8",
+#         "*.pem",
+#     ]),
+#     visibility = ["//visibility:public"],
+# )
+# EOF
 
-echo "include vendor/extra/product.mk" >> device/phh/treble/treble_arm_bvZ.mk
+echo "-include vendor/extra/product.mk" >> device/phh/treble/treble_arm_bvZ.mk
 cat device/phh/treble/treble_arm_bvZ.mk
 cd external/chromium-webview/prebuilt/arm64
 git lfs install
