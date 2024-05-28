@@ -1,7 +1,7 @@
 source build/envsetup.sh
 
 MAIN=/tmp/src/android
-OUT=$MAIN/out/target/product/phhgsi_arm64_ab/system.img
+OUT=$MAIN/out/target/product/phhgsi_arm64_ab
 
 cp -r $MAIN/android-certs $HOME/.android-certs
 
