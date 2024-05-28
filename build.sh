@@ -226,7 +226,7 @@ cat device/phh/treble/treble_arm_bvZ.mk
    lunch ${TARGET}-userdebug
    make clean
    mka bacon
-
+   mka target-files-package otatools
 
 # # Main environment
 # MAIN=/tmp/src/android
