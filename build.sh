@@ -223,9 +223,10 @@ cat device/phh/treble/treble_arm_bvZ.mk
 
 
 
-    lunch ${TARGET}-userdebug
+   # lunch ${TARGET}-userdebug
     # m bacon
     # mka bacon
+    breakfast treble_arm64_bvZ userdebug
     brunch treble_arm64_bvZ
 
 # # Main environment
