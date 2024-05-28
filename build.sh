@@ -177,20 +177,24 @@ for folder in $folders; do
 done
 
 
-
-rm -rf vendor/extra
-rm -rf ~/.android-certs
+# Check if the directory exists
+if [ -d "vendor/extra/keys" ]; then
+  # Check if the directory is empty
+  if [ "$(ls -A vendor/extra/keys)" ]; then
+    echo "not empty skipping key creation"
+  else
     subject='/C=PH/ST=Philippines/L=Manila/O=Rex H/OU=Rex H/CN=Rex H/emailAddress=dtiven13@gmail.com'
-mkdir ~/.android-certs
+mkdir ./android-certs
 
 for x in releasekey platform shared media networkstack testkey cyngn-priv-app bluetooth sdk_sandbox verifiedboot; do 
-    yes "" | ./development/tools/make_key ~/.android-certs/$x "$subject"
+    yes "" | ./development/tools/make_key ./android-certs/$x "$subject"; \
 done
+
 
 mkdir vendor/extra
 mkdir vendor/lineage-priv
 
-mv ~/.android-certs vendor/extra/keys
+cp -r ./android-certs vendor/extra/keys
 #For Lineage 21 and newer use the command below if not then use above 
 #cp ~/.android-certs vendor/lineage-priv/keys
 echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/extra/keys/releasekey" > vendor/extra/product.mk
@@ -207,17 +211,17 @@ echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/extra/keys/releasekey" > vendor/
 #     visibility = ["//visibility:public"],
 # )
 # EOF
+  fi
+else
+  echo "Directory vendor/extra/keys does not exist."
+fi
 
-echo "-include vendor/extra/product.mk" >> device/phh/treble/treble_arm_bvZ.mk
-cat device/phh/treble/treble_arm_bvZ.mk
-cd external/chromium-webview/prebuilt/arm64
-git lfs install
-git rev-parse --git-dir
-git config --global --add safe.directory external/chromium-webview/prebuilt/arm64/
-git lfs pull
-cd ../../../..
 
-repo forall -g lfs -c 'git lfs pull'
+
+
+
+
+
     lunch ${TARGET}-userdebug
     make clean
     make -j$(nproc --all) systemimage
