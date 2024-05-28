@@ -223,7 +223,7 @@ cat device/phh/treble/treble_arm_bvZ.mk
 
     lunch ${TARGET}-userdebug
     mka target-files-package otatools
-
+MAIN=/tmp/src/android
     cp -r $MAIN/android-certs $HOME/.android-certs
 
 
