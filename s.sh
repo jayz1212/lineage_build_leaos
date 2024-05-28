@@ -7,11 +7,11 @@ cp -r $MAIN/android-certs $HOME/.android-certs
 
 
 #cd out/target/product/phhgsi_arm64_ab
-sign_target_files_apks -o -d ~/.android-certs \
+./build/tools/releasetools/sign_target_files_apks -o -d ~/.android-certs \
 system.img \
 sign.img
 
-ota_from_target_files -k ~/.android-certs/releasekey \
+./build/tools/releasetools/sign_target_files_apks -k ~/.android-certs/releasekey \
     --block --backup=true \
     sign.img \
     signed.img
