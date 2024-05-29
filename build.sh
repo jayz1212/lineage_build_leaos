@@ -138,96 +138,55 @@ rm out/target/product/*/*.img
 #rm frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 #mv lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid/
 
-# Scan all folders under external/chromium-webview/prebuilt/*
-echo "Scanning folders in external/chromium-webview/prebuilt/*"
-folders=$(find external/chromium-webview/prebuilt/* -type d)
+# # Scan all folders under external/chromium-webview/prebuilt/*
+# echo "Scanning folders in external/chromium-webview/prebuilt/*"
+# folders=$(find external/chromium-webview/prebuilt/* -type d)
 
-# Install Git LFS
-echo "Installing Git LFS"
-git lfs install
+# # Install Git LFS
+# echo "Installing Git LFS"
+# git lfs install
 
-# Loop through each folder
-for folder in $folders; do
-  echo "Processing folder: $folder"
+# # Loop through each folder
+# for folder in $folders; do
+#   echo "Processing folder: $folder"
   
-  # Check if the folder is a Git repository
-  if [ -d "$folder/.git" ]; then
-    echo "$folder is a Git repository"
+#   # Check if the folder is a Git repository
+#   if [ -d "$folder/.git" ]; then
+#     echo "$folder is a Git repository"
     
-    # Navigate to the Git repository
-    cd "$folder"
+#     # Navigate to the Git repository
+#     cd "$folder"
     
-    # Get the Git directory
-    GIT_DIR=$(git rev-parse --git-dir)
-    echo "Git directory is: $GIT_DIR"
+#     # Get the Git directory
+#     GIT_DIR=$(git rev-parse --git-dir)
+#     echo "Git directory is: $GIT_DIR"
     
-    # Add the folder to the list of safe directories
-    echo "Adding $folder to the list of safe directories"
-    git config --global --add safe.directory "$folder"
+#     # Add the folder to the list of safe directories
+#     echo "Adding $folder to the list of safe directories"
+#     git config --global --add safe.directory "$folder"
     
-    # Pull Git LFS objects
-    echo "Pulling Git LFS objects"
-    git lfs pull
+#     # Pull Git LFS objects
+#     echo "Pulling Git LFS objects"
+#     git lfs pull
     
-    # Navigate back to the initial directory
-    cd - > /dev/null
-  else
-    echo "$folder is not a Git repository"
-  fi
-done
+#     # Navigate back to the initial directory
+#     cd - > /dev/null
+#   else
+#     echo "$folder is not a Git repository"
+#   fi
+# done
 
 
-mkdir -p vendor/extra
-
-if [ -d "vendor/extra/keys" ]; then
-  echo "Directory vendor/extra/keys already exists, skipping."
-else
-    subject='/C=PH/ST=Philippines/L=Manila/O=Rex H/OU=Rex H/CN=Rex H/emailAddress=dtiven13@gmail.com'
-
-mkdir ~/.android-certs
-
-for x in releasekey platform shared media networkstack testkey cyngn-priv-app bluetooth sdk_sandbox verifiedboot; do \
-yes "" | ./development/tools/make_key ~/.android-certs/$x "$subject"; \
-done
-
-
-
-mkdir -p vendor/extra
-mkdir vendor/lineage-priv
-
-mv ~/.android-certs vendor/extra/keys
-#For Lineage 21 and newer use the command below if not then use above 
-#cp ~/.android-certs vendor/lineage-priv/keys
-echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/extra/keys/releasekey" > vendor/extra/product.mk
-#For Lineage 21 and newer use the command below if not then use above
-#echo "PRODUCT_DEFAULT_DEV_CERTIFICATE := vendor/lineage-priv/keys/releasekey" > vendor/lineage-priv/keys/keys.mk
-
-# cat << 'EOF' > vendor/extra/keys/BUILD.bazel
-# filegroup(
-#     name = "android_certificate_directory",
-#     srcs = glob([
-#         "*.pk8",
-#         "*.pem",
-#     ]),
-#     visibility = ["//visibility:public"],
-# )
-# EOF
-  echo "Key Created."
-fi
-
-
-echo "-include vendor/extra/product.mk" >> device/phh/treble/treble_arm_bvZ.mk
-cat device/phh/treble/treble_arm_bvZ.mk
 
 
 
 
 
    lunch ${TARGET}-userdebug
- make clean
-   m bacon
-   mka bacon
-   make bacon
+# make clean
+   # m bacon
+   # mka bacon
+   # make bacon
 #   make -j$(nproc --all) systemimage
    #mka target-files-package otatools
 
