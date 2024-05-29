@@ -1,3 +1,3 @@
 source build/envsetup.sh
-    lunch treble_arm64_bvZ-userdebug
-    make bacon
+lunch treble_arm64_bvZ-userdebug
+m bacon
