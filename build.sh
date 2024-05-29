@@ -184,9 +184,9 @@ rm out/target/product/*/*.img
 
    lunch ${TARGET}-userdebug
 # make clean
-   # m bacon
-   # mka bacon
-   # make bacon
+   m bacon
+   mka bacon
+   make bacon
 #   make -j$(nproc --all) systemimage
    #mka target-files-package otatools
 
