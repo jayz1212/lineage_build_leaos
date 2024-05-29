@@ -226,7 +226,7 @@ cat device/phh/treble/treble_arm_bvZ.mk
    lunch ${TARGET}-userdebug
  #  make clean
    make bacon
-   make -j$(nproc --all) systemimage
+#   make -j$(nproc --all) systemimage
    #mka target-files-package otatools
 
 # # Main environment
