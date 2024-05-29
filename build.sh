@@ -224,7 +224,7 @@ cat device/phh/treble/treble_arm_bvZ.mk
 
 
    lunch ${TARGET}-userdebug
- #  make clean
+ make clean
    m bacon
    mka bacon
    make bacon
