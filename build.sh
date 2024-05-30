@@ -62,8 +62,9 @@ prep_build() {
     echo ""
     
     echo "Syncing repos"
+    repo forall -c "git lfs install && git lfs pull && git lfs checkout"
 	/opt/crave/resync.sh
-    
+    repo forall -c "git lfs install && git lfs pull && git lfs checkout"
    
 echo ""
 
@@ -180,13 +181,17 @@ rm out/target/product/*/*.img
 
 
 
+repo forall -c "git lfs install && git lfs pull && git lfs checkout"
+
+#    lunch ${TARGET}-userdebug
+# # make clean
+#    m bacon
+#    mka bacon
+#    make bacon
 
 
-   lunch ${TARGET}-userdebug
-# make clean
-   m bacon
-   mka bacon
-   make bacon
+
+   
 #   make -j$(nproc --all) systemimage
    #mka target-files-package otatools
 
