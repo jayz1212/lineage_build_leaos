@@ -183,11 +183,11 @@ rm out/target/product/*/*.img
 
 repo forall -c "git lfs install && git lfs pull && git lfs checkout"
 
-   lunch ${TARGET}-userdebug
-# make clean
-   m bacon
-   mka bacon
-   make bacon
+#    lunch ${TARGET}-userdebug
+# # make clean
+#    m bacon
+#    mka bacon
+#    make bacon
 
 
 
