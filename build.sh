@@ -133,49 +133,13 @@ build_treble() {
         ("64BVS") TARGET=treble_arm64_bvS;;
         ("64BVZ") TARGET=treble_arm64_bvZ;;
         ("64BVN") TARGET=treble_arm64_bvN;;
+	("64AVN") TARGET=treble_arm64_avN;;
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
 rm out/target/product/*/*.img
 #rm frameworks/base/core/java/com/android/internal/util/crdroid/PixelPropsUtils.java
 #mv lineage_build_leaos/PixelPropsUtils.java frameworks/base/core/java/com/android/internal/util/crdroid/
 
-# # Scan all folders under external/chromium-webview/prebuilt/*
-# echo "Scanning folders in external/chromium-webview/prebuilt/*"
-# folders=$(find external/chromium-webview/prebuilt/* -type d)
-
-# # Install Git LFS
-# echo "Installing Git LFS"
-# git lfs install
-
-# # Loop through each folder
-# for folder in $folders; do
-#   echo "Processing folder: $folder"
-  
-#   # Check if the folder is a Git repository
-#   if [ -d "$folder/.git" ]; then
-#     echo "$folder is a Git repository"
-    
-#     # Navigate to the Git repository
-#     cd "$folder"
-    
-#     # Get the Git directory
-#     GIT_DIR=$(git rev-parse --git-dir)
-#     echo "Git directory is: $GIT_DIR"
-    
-#     # Add the folder to the list of safe directories
-#     echo "Adding $folder to the list of safe directories"
-#     git config --global --add safe.directory "$folder"
-    
-#     # Pull Git LFS objects
-#     echo "Pulling Git LFS objects"
-#     git lfs pull
-    
-#     # Navigate back to the initial directory
-#     cd - > /dev/null
-#   else
-#     echo "$folder is not a Git repository"
-#   fi
-# done
 
 
 
@@ -183,42 +147,9 @@ rm out/target/product/*/*.img
 
 repo forall -c "git lfs install && git lfs pull && git lfs checkout"
 
-#    lunch ${TARGET}-userdebug
-# # make clean
-#    m bacon
-#    mka bacon
-#    make bacon
-
-
-
-   
-#   make -j$(nproc --all) systemimage
+lunch ${TARGET}-userdebug
+make -j$(nproc --all) systemimage
    #mka target-files-package otatools
-
-# # Main environment
-# MAIN=/tmp/src/android
-# OUT=$MAIN/out/target/product/phhgsi_arm64_ab
-
-# # Copy into admin folder
-# cp -R $MAIN/android-certs $HOME/.android-certs
-
-# # Change directory to the root of the Android build environment
-# cd $MAIN
-
-
-
-
-# croot
-# ./build/tools/releasetools/ sign_target_files_apks -o -d ~/.android-certs \
-#     $OUT/obj/PACKAGING/target_files_intermediates/*-target_files-*.zip \
-#     signed-target_files.zip
-
-
-# ./build/tools/releasetools/ota_from_target_files -k ~/.android-certs/releasekey \
-#     --block --backup=true \
-#     signed-target_files.zip \
-#     signed-ota_update.zip
-
 
 
 
